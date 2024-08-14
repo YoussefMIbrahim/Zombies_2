@@ -2,46 +2,36 @@
 CSC 422 - Software Engineering
 Zombie War Project
 */
-public class ZombieWar {
+public class Zombie {
+    
 
-        public static void main(String[] args) {
-        }
-}
+    private int health;
+    private int damage;
 
+    public Survivor(int health, int damage){
+        this.health = health;
+        this.damage =damage;
 
-//Zombie Class
-public class Zombie extends Character {
-
-// Zombie types
-    static final String COMMON_INFECTED = "CommonInfected";
-    static final String TANK = "Tank";
-
-    private final String zombieType;
-
-    public Zombie(String zombieType, int health, int attack) {
-        super(Character.Zombie, health, attack);
-
-// sets zombie type
-        this.zombieType = zombieType;
-}
-
-    @Override
-    public String toString() {
-        return zombieType;
     }
-}
 
-
-//Tank Class
-public class Tank extends Zombie {
-
-    private static final int HEALTH = 100;
-    private static final int ATTACK = 10;
-
-
-    public Tank() {
-        super(Zombie.TANK, HEALTH, ATTACK);
+    public int attack(){
+        return this.damage;
     }
-}
 
+    public void hit(int damageTaken){
+        this.health -= damageTaken;
+    }
+
+    public boolean dead(){
+        return this.health <=0;
+
+    }
+
+    public int getHealth(){return this.health;}
+
+    public void setHealth(int health){this.health = health;}
+
+    public int getDamage(){return this.damage;}
+
+    public void setDamage(int damage){this.damage = damage;}
 }
