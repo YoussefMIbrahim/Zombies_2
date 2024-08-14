@@ -1,7 +1,3 @@
-/*
-CSC 422 - Software Engineering
-Zombie War Project
-*/
 public class Zombie {
     
 
