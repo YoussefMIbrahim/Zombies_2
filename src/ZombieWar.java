@@ -5,13 +5,7 @@ Zombie War Project
 public class ZombieWar {
 
         public static void main(String[] args) {
-
-        System.out.println("Hello GITHUB");
-    }
-
-    //Zombie.java
-
-   }
+        }
 }
 
 
