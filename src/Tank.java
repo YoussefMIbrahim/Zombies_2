@@ -1,6 +1,6 @@
 public class Tank extends Zombie {
     
-    public Tank()
+    public Tank(){
         super(100,10);
     }
     

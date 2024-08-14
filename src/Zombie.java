@@ -4,7 +4,7 @@ public class Zombie {
     private int health;
     private int damage;
 
-    public Survivor(int health, int damage){
+    public Zombie(int health, int damage){
         this.health = health;
         this.damage =damage;
 
