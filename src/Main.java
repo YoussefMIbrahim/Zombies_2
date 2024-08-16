@@ -80,7 +80,6 @@ public class Main {
         while (!survivors.isEmpty() && !zombies.isEmpty()) {
 
             //Generatates a random number between 0 and the size of the list
-            Object survivor = survivors.get(random.nextInt(survivors.size()));
 
             Object zombie = zombies.get(random.nextInt(zombies.size()));
 
@@ -100,6 +99,7 @@ public class Main {
 
                 System.out.println(((Survivor) survivor).getClass().getSimpleName() + " killed " + ((Zombie) zombie).getClass().getSimpleName());
 
+
                 zombies.remove(zombie);
                 }
 
@@ -109,6 +109,7 @@ public class Main {
             System.out.println(((Zombie) zombie).getClass().getSimpleName() + " killed " + ((Survivor) survivor).getClass().getSimpleName());
 
             survivors.remove(survivor);
+
 
             }    
         }    
