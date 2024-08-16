@@ -68,8 +68,6 @@ public class Main {
     }
 
 
-}
-
     //Starting the Zombie War
     public static void ZombieWar(List < Object > survivors, List < Object > zombies) {
 
@@ -114,3 +112,6 @@ public class Main {
             }    
         }    
     }
+
+
+}
