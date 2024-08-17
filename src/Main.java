@@ -83,32 +83,34 @@ public class Main {
 
             //Generatates a random number between 0 and the size of the list
 
-            int survivorIndex = random.nextInt(survivors.size());
-            Object survivor = survivors.get(survivorIndex);
+            // int survivorIndex = random.nextInt(survivors.size());
+            // Object survivor = survivors.get(survivorIndex);
 
-            int zombieIndex = random.nextInt(zombies.size());
-            Object zombie = zombies.get(zombieIndex);
+            // int zombieIndex = random.nextInt(zombies.size());
+            // Object zombie = zombies.get(zombieIndex);
+            
 
-            //Survivor attacks the zombie
-            int survivorAttack = ((Survivor) survivor).attack();
 
-            //Zombie attacks the suvivor
-            int zombieAttack = ((Zombie) zombie).attack();
+            // //Survivor attacks the zombie
+            // int survivorAttack = ((Survivor) survivor).attack();
 
-            //Takes damage lose health
-            ((Zombie) zombie).hit(survivorAttack);
+            // //Zombie attacks the suvivor
+            // int zombieAttack = ((Zombie) zombie).attack();
 
-            ((Survivor) survivor).hit(zombieAttack);
+            // //Takes damage lose health
+            // ((Zombie) zombie).hit(survivorAttack);
 
-            //If the zombie is dead it is removed from the list
-            if (((Zombie) zombie).dead()) {
-                zombies.remove(zombie);
-            }
+            // ((Survivor) survivor).hit(zombieAttack);
 
-            //If the Survivor is dead it is removed from the list
-            if (((Survivor) survivor).dead()) {
-                survivors.remove(survivor);
-            }    
+            // //If the zombie is dead it is removed from the list
+            // if (((Zombie) zombie).dead()) {
+            //     zombies.remove(zombie);
+            // }
+
+            // //If the Survivor is dead it is removed from the list
+            // if (((Survivor) survivor).dead()) {
+            //     survivors.remove(survivor);
+            // }    
         }    
     }
 }
