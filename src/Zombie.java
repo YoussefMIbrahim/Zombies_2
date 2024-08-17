@@ -3,6 +3,7 @@ public class Zombie {
 
     private int health;
     private int damage;
+    private int id;
 
     public Zombie(int health, int damage){
         this.health = health;
@@ -22,6 +23,8 @@ public class Zombie {
         return this.health <=0;
 
     }
+
+    public int getId(){return this.id;}
 
     public int getHealth(){return this.health;}
 
