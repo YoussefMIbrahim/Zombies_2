@@ -7,12 +7,15 @@ public class Main {
     public static void main(String[] args) throws Exception {
         System.out.println("Release 2.0's sample run:");
 
+
+        Random random = new Random();
+
         // calling the generate Objects method to generate a list of zombies or survivors depending on the information we pass through
         List<Zombie> zombieList = new ArrayList<>();
-        zombieList = generateZombies(8);
+        zombieList = generateZombies(random.nextInt(9)+1);
 
         List<Survivor> survivorList = new ArrayList<>();
-        survivorList = generateSurvivors(9);
+        survivorList = generateSurvivors(random.nextInt(9)+1);
 
 
         int [] survivorCount = survivorCount(survivorList);
