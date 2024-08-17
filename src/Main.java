@@ -14,9 +14,13 @@ public class Main {
         List<Survivor> survivorList = new ArrayList<>();
         survivorList = generateSurvivors(9);
 
+
+        int [] survivorCount = survivorCount(survivorList);
+        int [] zombieCount = zombieCount(zombieList);
+
         // randomly generated lists of zombies and survivors, currently just printing them out to make sure they are getting generated correctly.
-        System.out.println("We have " + survivorList.size() + " survivors trying to make it to safety.");
-        System.out.println("But there are " + zombieList.size() + " zombies waiting for them.");
+        System.out.println("We have " + survivorList.size() + " survivors trying to make it to safety. (" + survivorCount[0] + " scientist, " + survivorCount[1] + " civilian, " + survivorCount[0] + " soldiers)"  );
+        System.out.println("But there are " + zombieList.size() + " zombies waiting for them. (" + zombieCount[0] + " common infected, " + zombieCount[1] + " Tanks)");
 
         ZombieWar(survivorList, zombieList);
 
@@ -85,13 +89,14 @@ public class Main {
         //While loop to keep the game going until one side is empty
         while (!survivors.isEmpty() && !zombies.isEmpty()) {
 
-            
+            //Making an iterator for use with the zombie list, so that the zombie can be deleted safely
             Iterator<Zombie> zombieIterator = zombies.iterator();
 
             while(zombieIterator.hasNext()) {
                 
                 Zombie zombie = zombieIterator.next();
-            
+                
+                //Inner loop to make every survivor attack one specific zombie
                 for (Survivor survivor: survivors) {
 
                     if(zombies.isEmpty()){
@@ -102,6 +107,7 @@ public class Main {
 
                     zombie.hit(survivorAttack);
 
+                    //Checking if the zombie died and removing it from the list
                     if(zombie.dead()){
 
                         System.out.printf("%s %d Killed %s %d\n", survivor, survivor.getId(),zombie,zombie.getId());
@@ -112,12 +118,15 @@ public class Main {
                 }
             }
 
+
+            //Making an iterator for use with the survivor list, so that the zombie can be deleted safely
             Iterator<Survivor> survivorIterator = survivors.iterator();
 
             while(survivorIterator.hasNext()) {
                 
                 Survivor survivor = survivorIterator.next();
-            
+                
+                // Inner loop to make every zombie attack each individual survivor
                 for (Zombie zombie: zombies) {
 
                     if(survivors.isEmpty()){
@@ -127,7 +136,8 @@ public class Main {
                     int zombieAttack = zombie.attack();
 
                     survivor.hit(zombieAttack);
-
+                    
+                    //Checking if survivor is dead and removing them from the list
                     if(survivor.dead()){
 
                         System.out.printf("%s %d Killed %s %d\n", survivor, survivor.getId(),zombie,zombie.getId());
@@ -140,4 +150,41 @@ public class Main {
    
         }    
     }
+
+    //These mthods check what kind of object is in these lists, and returns a count of each class.
+    public static int[] survivorCount(List<Survivor> survivors){
+        
+        int civilians = 0;
+        int soldiers = 0;
+        int scientists = 0;
+
+        for(Survivor survivor: survivors){
+
+            if(survivor instanceof Soldier){
+                soldiers++;
+            }else if(survivor instanceof Scientist){
+                scientists++;
+            }else{
+                civilians++;
+            }
+        }
+        return new int[]{scientists,civilians,soldiers};
+    }
+
+    public static int[] zombieCount(List<Zombie> zombies){
+        
+        int common = 0;
+        int tanks = 0;
+
+        for(Zombie zombie: zombies){
+
+            if(zombie instanceof Tank){
+                tanks++;
+            }else{
+                common++;
+            }
+        }
+        return new int[]{common,tanks};
+    }
+    
 }
