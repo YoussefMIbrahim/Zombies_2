@@ -4,22 +4,27 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
-
+        System.out.println("Release 1.0's sample run:");
 
         // calling the generate Objects method to generate a list of zombies or survivors depending on the information we pass through
         List<Object> zombieList = new ArrayList<>();
-        zombieList = generateObjects(5,"Zombies");
+        zombieList = generateObjects(8,"Zombies");
 
         List<Object> survivorList = new ArrayList<>();
-        survivorList = generateObjects(5,"Survivors");
+        survivorList = generateObjects(17,"Survivors");
 
         // randomly generated lists of zombies and survivors, currently just printing them out to make sure they are getting generated correctly.
-        System.out.println(zombieList);
-        System.out.println(survivorList);
+        System.out.println("We have " + survivorList.size() + " survivors trying to make it to safety.");
+        System.out.println("But there are " + zombieList.size() + " zombies waiting for them.");
+
+        ZombieWar(survivorList, zombieList);
+
+        if(survivorList.size() > 0){
+            System.out.println("It seems " + survivorList.size() + " have made it to safety.");
+        } else {
+            System.out.println("It seems all survivors have been killed.");
+        }
     }
-
-
 
     // Generate the list of either zombies or survivors
     public static List<Object> generateObjects(int count, String type){
@@ -28,7 +33,6 @@ public class Main {
         Random random = new Random();
 
         List<Object> characters = new ArrayList<>();
-
 
         // generating zombies using random, if it's 0 we get common and 1 is tank
         if(type.equals("Zombies")){
@@ -79,12 +83,16 @@ public class Main {
 
             //Generatates a random number between 0 and the size of the list
 
-            Object zombie = zombies.get(random.nextInt(zombies.size()));
+            int survivorIndex = random.nextInt(survivors.size());
+            Object survivor = survivors.get(survivorIndex);
+
+            int zombieIndex = random.nextInt(zombies.size());
+            Object zombie = zombies.get(zombieIndex);
 
             //Survivor attacks the zombie
-            //Zombie attacks the suvivor
             int survivorAttack = ((Survivor) survivor).attack();
 
+            //Zombie attacks the suvivor
             int zombieAttack = ((Zombie) zombie).attack();
 
             //Takes damage lose health
@@ -94,24 +102,13 @@ public class Main {
 
             //If the zombie is dead it is removed from the list
             if (((Zombie) zombie).dead()) {
-
-                System.out.println(((Survivor) survivor).getClass().getSimpleName() + " killed " + ((Zombie) zombie).getClass().getSimpleName());
-
-
                 zombies.remove(zombie);
-                }
+            }
 
             //If the Survivor is dead it is removed from the list
             if (((Survivor) survivor).dead()) {
-
-            System.out.println(((Zombie) zombie).getClass().getSimpleName() + " killed " + ((Survivor) survivor).getClass().getSimpleName());
-
-            survivors.remove(survivor);
-
-
+                survivors.remove(survivor);
             }    
         }    
     }
-
-
 }
