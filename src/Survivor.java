@@ -1,10 +1,11 @@
-public class Zombie {
+
+public class Survivor {
     
 
     private int health;
     private int damage;
 
-    public Zombie(int health, int damage){
+    public Survivor(int health, int damage){
         this.health = health;
         this.damage =damage;
 
@@ -31,3 +32,5 @@ public class Zombie {
 
     public void setDamage(int damage){this.damage = damage;}
 }
+
+
