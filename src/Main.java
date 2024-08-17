@@ -7,11 +7,11 @@ public class Main {
         System.out.println("Release 1.0's sample run:");
 
         // calling the generate Objects method to generate a list of zombies or survivors depending on the information we pass through
-        List<Object> zombieList = new ArrayList<>();
-        zombieList = generateObjects(8,"Zombies");
+        List<Zombie> zombieList = new ArrayList<>();
+        zombieList = generateZombies(8);
 
-        List<Object> survivorList = new ArrayList<>();
-        survivorList = generateObjects(17,"Survivors");
+        List<Survivor> survivorList = new ArrayList<>();
+        survivorList = generateSurvivors(5);
 
         // randomly generated lists of zombies and survivors, currently just printing them out to make sure they are getting generated correctly.
         System.out.println("We have " + survivorList.size() + " survivors trying to make it to safety.");
@@ -27,15 +27,14 @@ public class Main {
     }
 
     // Generate the list of either zombies or survivors
-    public static List<Object> generateObjects(int count, String type){
+    public static List<Zombie> generateZombies(int count){
 
         // creating a new random object for list generation
         Random random = new Random();
 
-        List<Object> characters = new ArrayList<>();
+        List<Zombie> zombies = new ArrayList<>();
 
         // generating zombies using random, if it's 0 we get common and 1 is tank
-        if(type.equals("Zombies")){
 
             for (int i = 0; i < count; i++){
 
@@ -44,36 +43,42 @@ public class Main {
 
                 switch (num) {
 
-                    case 0 -> characters.add(new CommonInfected());
-                    case 1 -> characters.add(new Tank());
+                    case 0 -> zombies.add(new CommonInfected());
+                    case 1 -> zombies.add(new Tank());
                 }
             }
-            return characters;
-
-        }else{
-
-            for (int i = 0; i < count; i++){
-
-                // generating a random number between 0 and 3 to generate a random survivor
-                int num = random.nextInt(3);
-
-                // generating survivors depending on the number from random
-                switch (num) {
-
-                    case 0 -> characters.add(new Civilian());
-                    case 1 -> characters.add(new Soldier());
-                    case 2 -> characters.add(new Scientist());
-                }
-            }
-
-            return characters;
+        return zombies;
         }
 
-    }
+
+
+    public static List<Survivor> generateSurvivors(int count){
+
+        Random random = new Random();
+
+        List<Survivor> survivors = new ArrayList<>();
+
+        for (int i = 0; i < count; i++){
+
+            // generating a random number between 0 and 3 to generate a random survivor
+            int num = random.nextInt(3);
+
+            // generating survivors depending on the number from random
+            switch (num) {
+
+                case 0 -> survivors.add(new Civilian());
+                case 1 -> survivors.add(new Soldier());
+                case 2 -> survivors.add(new Scientist());
+            }
+        }
+
+            return survivors;
+        }
+
 
 
     //Starting the Zombie War
-    public static void ZombieWar(List < Object > survivors, List < Object > zombies) {
+    public static void ZombieWar(List < Survivor > survivors, List < Zombie > zombies) {
 
 
         //While loop to keep the game going until one side is empty
@@ -82,14 +87,17 @@ public class Main {
 
 
             // Object zombie = zombies.get(zombieIndex);
-            for (int idx = 0; idx < zombies.size(); idx++) {
+            for (int idx = 0; idx < survivors.size(); idx++) {
                 
-                System.out.println("Zombie loop: " + idx);
+                // System.out.println("Zombie loop: " + idx);
             
                 for (int i = 0; i < survivors.size(); i++) {
 
+                    if(zombies.isEmpty()){
+                        break;
+                    }
 
-                    System.out.println("Survivor loop: " + i);
+                    // System.out.println("Survivor loop: " + i);
 
 
                     Object survivor = survivors.get(i);
@@ -102,33 +110,44 @@ public class Main {
                     if(((Zombie)zombie).dead()){
 
                         System.out.printf("%s %d Killed %s %d\n", ((Survivor)survivor).getClass(),((Survivor)survivor).getId(),((Zombie)zombie).getClass(),((Zombie)zombie).getId());
-                        zombies.remove(((Zombie)zombies.get(idx)));
+                        zombies.remove(idx);
+                        break;
                         
                     }
 
                 }
 
             }
-            // //Survivor attacks the zombie
-            // int survivorAttack = ((Survivor) survivor).attack();
 
-            // //Zombie attacks the suvivor
-            // int zombieAttack = ((Zombie) zombie).attack();
+            // for (Object survivor1 : survivors) {
+            //     // System.out.println("Zombie loop: " + idx);
+            
+            //     for (int i = 0; i < zombies.size(); i++) {
 
-            // //Takes damage lose health
-            // ((Zombie) zombie).hit(survivorAttack);
+            //         if(survivors.isEmpty()){
+            //             break;
+            //         }
 
-            // ((Survivor) survivor).hit(zombieAttack);
+            //         // System.out.println("zombie loop: " + i);
+                    
+                    
+            //         Object survivor = survivors.get(0);
+            //         Object zombie = zombies.get(i);
 
-            // //If the zombie is dead it is removed from the list
-            // if (((Zombie) zombie).dead()) {
-            //     zombies.remove(zombie);
+            //         int zombieAttack = ((Zombie)zombie).attack();
+
+            //         ((Survivor)survivor).hit(zombieAttack);
+
+            //         if(((Survivor)survivor).dead()){
+
+            //             System.out.printf("%s %d Killed %s %d\n", ((Survivor)survivor).getClass(),((Survivor)survivor).getId(),((Zombie)zombie).getClass(),((Zombie)zombie).getId());
+            //             zombies.remove(0);
+                        
+            //         }
+
+            //     }
             // }
-
-            // //If the Survivor is dead it is removed from the list
-            // if (((Survivor) survivor).dead()) {
-            //     survivors.remove(survivor);
-            // }    
+   
         }    
     }
 }
