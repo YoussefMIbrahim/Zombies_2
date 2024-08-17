@@ -75,22 +75,40 @@ public class Main {
     //Starting the Zombie War
     public static void ZombieWar(List < Object > survivors, List < Object > zombies) {
 
-        //creating a new random object for selecting a random survivor or zombie
-        Random random = new Random();
 
         //While loop to keep the game going until one side is empty
         while (!survivors.isEmpty() && !zombies.isEmpty()) {
 
-            //Generatates a random number between 0 and the size of the list
 
-            // int survivorIndex = random.nextInt(survivors.size());
-            // Object survivor = survivors.get(survivorIndex);
 
-            // int zombieIndex = random.nextInt(zombies.size());
             // Object zombie = zombies.get(zombieIndex);
+            for (int idx = 0; idx < zombies.size(); idx++) {
+                
+                System.out.println("Zombie loop: " + idx);
             
+                for (int i = 0; i < survivors.size(); i++) {
 
 
+                    System.out.println("Survivor loop: " + i);
+
+
+                    Object survivor = survivors.get(i);
+                    Object zombie = zombies.get(idx);
+
+                    int survivorAttack = ((Survivor)survivor).attack();
+
+                    ((Zombie)zombie).hit(survivorAttack);
+
+                    if(((Zombie)zombie).dead()){
+
+                        System.out.printf("%s %d Killed %s %d\n", ((Survivor)survivor).getClass(),((Survivor)survivor).getId(),((Zombie)zombie).getClass(),((Zombie)zombie).getId());
+                        zombies.remove(((Zombie)zombies.get(idx)));
+                        
+                    }
+
+                }
+
+            }
             // //Survivor attacks the zombie
             // int survivorAttack = ((Survivor) survivor).attack();
 

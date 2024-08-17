@@ -10,4 +10,7 @@ public class CommonInfected extends Zombie {
         this.id = ++counter;
     }
 
+    @Override
+    public int getId(){return this.id;}
+
 }

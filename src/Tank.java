@@ -8,5 +8,9 @@ public class Tank extends Zombie {
 
         this.id = ++counter;
     }
+
+    @Override
+    public int getId(){return this.id;}
+
     
 }

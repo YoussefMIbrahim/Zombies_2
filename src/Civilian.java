@@ -7,7 +7,11 @@ public class Civilian extends Survivor{
 
         super(50,5);
         this.id = ++counter;
-        
+
     }
+
+    @Override
+    public int getId(){return this.id;}
+
     
 }

@@ -7,4 +7,8 @@ public class Scientist extends Survivor{
         super(20,2);
         this.id = ++counter;
     }
+
+    @Override
+    public int getId(){return this.id;}
+
 }

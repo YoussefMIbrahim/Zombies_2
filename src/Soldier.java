@@ -8,4 +8,8 @@ public class Soldier extends Survivor {
         this.id = ++counter;
     }
     
+    @Override
+    public int getId(){return this.id;}
+
+    
 }
