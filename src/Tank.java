@@ -12,5 +12,6 @@ public class Tank extends Zombie {
     @Override
     public int getId(){return this.id;}
 
-    
+    @Override
+    public String toString(){return "Tank";}
 }

@@ -13,5 +13,7 @@ public class Civilian extends Survivor{
     @Override
     public int getId(){return this.id;}
 
+    @Override
+    public String toString(){return "Civilian";}
     
 }

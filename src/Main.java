@@ -1,17 +1,18 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        System.out.println("Release 1.0's sample run:");
+        System.out.println("Release 2.0's sample run:");
 
         // calling the generate Objects method to generate a list of zombies or survivors depending on the information we pass through
         List<Zombie> zombieList = new ArrayList<>();
         zombieList = generateZombies(8);
 
         List<Survivor> survivorList = new ArrayList<>();
-        survivorList = generateSurvivors(5);
+        survivorList = generateSurvivors(9);
 
         // randomly generated lists of zombies and survivors, currently just printing them out to make sure they are getting generated correctly.
         System.out.println("We have " + survivorList.size() + " survivors trying to make it to safety.");
@@ -84,69 +85,58 @@ public class Main {
         //While loop to keep the game going until one side is empty
         while (!survivors.isEmpty() && !zombies.isEmpty()) {
 
-
-
-            // Object zombie = zombies.get(zombieIndex);
-            for (int idx = 0; idx < survivors.size(); idx++) {
-                
-                // System.out.println("Zombie loop: " + idx);
             
-                for (int i = 0; i < survivors.size(); i++) {
+            Iterator<Zombie> zombieIterator = zombies.iterator();
+
+            while(zombieIterator.hasNext()) {
+                
+                Zombie zombie = zombieIterator.next();
+            
+                for (Survivor survivor: survivors) {
 
                     if(zombies.isEmpty()){
                         break;
                     }
 
-                    // System.out.println("Survivor loop: " + i);
+                    int survivorAttack = survivor.attack();
 
+                    zombie.hit(survivorAttack);
 
-                    Object survivor = survivors.get(i);
-                    Object zombie = zombies.get(idx);
+                    if(zombie.dead()){
 
-                    int survivorAttack = ((Survivor)survivor).attack();
-
-                    ((Zombie)zombie).hit(survivorAttack);
-
-                    if(((Zombie)zombie).dead()){
-
-                        System.out.printf("%s %d Killed %s %d\n", ((Survivor)survivor).getClass(),((Survivor)survivor).getId(),((Zombie)zombie).getClass(),((Zombie)zombie).getId());
-                        zombies.remove(idx);
+                        System.out.printf("%s %d Killed %s %d\n", survivor, survivor.getId(),zombie,zombie.getId());
+                        zombieIterator.remove();
                         break;
                         
                     }
-
                 }
-
             }
 
-            // for (Object survivor1 : survivors) {
-            //     // System.out.println("Zombie loop: " + idx);
+            Iterator<Survivor> survivorIterator = survivors.iterator();
+
+            while(survivorIterator.hasNext()) {
+                
+                Survivor survivor = survivorIterator.next();
             
-            //     for (int i = 0; i < zombies.size(); i++) {
+                for (Zombie zombie: zombies) {
 
-            //         if(survivors.isEmpty()){
-            //             break;
-            //         }
+                    if(survivors.isEmpty()){
+                        break;
+                    }
 
-            //         // System.out.println("zombie loop: " + i);
-                    
-                    
-            //         Object survivor = survivors.get(0);
-            //         Object zombie = zombies.get(i);
+                    int zombieAttack = zombie.attack();
 
-            //         int zombieAttack = ((Zombie)zombie).attack();
+                    survivor.hit(zombieAttack);
 
-            //         ((Survivor)survivor).hit(zombieAttack);
+                    if(survivor.dead()){
 
-            //         if(((Survivor)survivor).dead()){
-
-            //             System.out.printf("%s %d Killed %s %d\n", ((Survivor)survivor).getClass(),((Survivor)survivor).getId(),((Zombie)zombie).getClass(),((Zombie)zombie).getId());
-            //             zombies.remove(0);
+                        System.out.printf("%s %d Killed %s %d\n", survivor, survivor.getId(),zombie,zombie.getId());
+                        survivorIterator.remove();
+                        break;
                         
-            //         }
-
-            //     }
-            // }
+                    }
+                }
+            }
    
         }    
     }

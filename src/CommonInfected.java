@@ -13,4 +13,6 @@ public class CommonInfected extends Zombie {
     @Override
     public int getId(){return this.id;}
 
+    @Override
+    public String toString(){return "Common Infected";}
 }
