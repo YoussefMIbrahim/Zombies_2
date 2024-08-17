@@ -22,7 +22,7 @@ public class Main {
         int [] zombieCount = zombieCount(zombieList);
 
         // randomly generated lists of zombies and survivors, currently just printing them out to make sure they are getting generated correctly.
-        System.out.println("We have " + survivorList.size() + " survivors trying to make it to safety. (" + survivorCount[0] + " scientist, " + survivorCount[1] + " civilian, " + survivorCount[0] + " soldiers)"  );
+        System.out.println("We have " + survivorList.size() + " survivors trying to make it to safety. (" + survivorCount[0] + " scientist, " + survivorCount[1] + " civilian, " + survivorCount[2] + " soldiers)"  );
         System.out.println("But there are " + zombieList.size() + " zombies waiting for them. (" + zombieCount[0] + " common infected, " + zombieCount[1] + " Tanks)");
 
         ZombieWar(survivorList, zombieList);
@@ -102,10 +102,6 @@ public class Main {
                 //Inner loop to make every survivor attack one specific zombie
                 for (Survivor survivor: survivors) {
 
-                    if(zombies.isEmpty()){
-                        break;
-                    }
-
                     int survivorAttack = survivor.attack();
 
                     zombie.hit(survivorAttack);
@@ -122,7 +118,7 @@ public class Main {
             }
 
 
-            //Making an iterator for use with the survivor list, so that the zombie can be deleted safely
+            //Making an iterator for use with the survivor list, so that the survivors can be deleted safely
             Iterator<Survivor> survivorIterator = survivors.iterator();
 
             while(survivorIterator.hasNext()) {
@@ -132,10 +128,6 @@ public class Main {
                 // Inner loop to make every zombie attack each individual survivor
                 for (Zombie zombie: zombies) {
 
-                    if(survivors.isEmpty()){
-                        break;
-                    }
-
                     int zombieAttack = zombie.attack();
 
                     survivor.hit(zombieAttack);
@@ -143,7 +135,7 @@ public class Main {
                     //Checking if survivor is dead and removing them from the list
                     if(survivor.dead()){
 
-                        System.out.printf("%s %d Killed %s %d\n", survivor, survivor.getId(),zombie,zombie.getId());
+                        System.out.printf("%s %d Killed %s %d\n", zombie, zombie.getId(),survivor,survivor.getId());
                         survivorIterator.remove();
                         break;
                         
