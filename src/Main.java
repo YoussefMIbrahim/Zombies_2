@@ -18,10 +18,10 @@ public class Main {
 
         //randomly generated lists of zombies and survivors, currently just printing them out to make sure they are getting generated correctly.
         System.out.println("We have " + survivorList.size() + " survivors trying to make it to safety. (" +
-            survivorCount[1] + " scientist, " + survivorCount[2] + " civilian, " +
+            survivorCount[0] + " scientist, " + survivorCount[1] + " civilian, " +
             survivorCount[2] + " soldiers)");
         System.out.println("But there are " + zombieList.size() + " zombies waiting for them. (" +
-            zombieCount[1] + " common infected, " + zombieCount[1] + " Tanks)");
+            zombieCount[0] + " common infected, " + zombieCount[1] + " Tanks)");
 
         //Begin zombie war
         ZombieWar(survivorList, zombieList);
