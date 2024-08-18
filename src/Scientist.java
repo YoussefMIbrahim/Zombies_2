@@ -1,16 +1,14 @@
-public class Scientist extends Survivor{
+public class Scientist extends Survivor {
 
+    //Keeps track of Scientist instances
     private static int counter = 0;
+
+    //Unique ID
     private int id;
 
-    public Scientist(){
-        super(20,2);
+    //Getting Scientist ID
+    //Retruns ID
+    public Scientist() {
         this.id = ++counter;
     }
-
-    @Override
-    public int getId(){return this.id;}
-
-    @Override
-    public String toString(){return "Scientist";}
 }

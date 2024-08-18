@@ -1,39 +1,67 @@
+import java.util.Random;
 
-public class Survivor {
-    
-
-    private int health;
-    private int damage;
+//Genertating random weapons for survivors using a unique id
+//Also health value of the survivor
+public abstract class Survivor {
+    private Weapon weapon;
+    private static final Random random = new Random();
     private int id;
+    private static int idCounter = 1;
+    private int health;
 
-    public Survivor(int health, int damage){
-        this.health = health;
-        this.damage =damage;
-
+    //Constructor to initialize a survivor with random weapon
+    //Setting intitial health
+    public Survivor() {
+        this.weapon = generateRandomWeapon();
+        this.id = idCounter++;
+        this.health = 100;
     }
 
-    public int attack(){
-        return this.damage;
+    //Randomly assigning a weapon to the survivor
+    private Weapon generateRandomWeapon() {
+
+        //Weapons available
+        Weapon[] weapons = {
+            new Weapon("Shotgun", 30, 0.7),
+            new Weapon("Submachine gun", 20, 0.6),
+            new Weapon("Assault Rifle", 2, 0.8),
+            new Weapon("Pistol", 20, 0.9),
+            new Weapon("Axe", 15, 0.6),
+            new Weapon("Crowbar", 15, 0.8),
+            new Weapon("Frying Pan", 10, 0.9)
+        };
+
+        return weapons[random.nextInt(weapons.length)];
     }
 
-    public void hit(int damageTaken){
-        this.health -= damageTaken;
+    //Survivor attacks first
+    public int attack() {
+        //If the weapon hits the target it returns the damage
+        //If it misses it returns 0
+        if (weapon.isHit()) {
+            return weapon.getDamage();
+        } else {
+            return 0;
+        }
     }
 
-    public boolean dead(){
-        return this.health <=0;
-
+    //Getting weapon
+    public Weapon getWeapon() {
+        return weapon;
     }
 
-    public int getId(){return this.id;}
+    //Getting ID
+    public int getId() {
+        return id;
+    }
 
-    public int getHealth(){return this.health;}
+    //Survivor damage from Zombie
+    public void hit(int damage) {
+        this.health -= damage;
+    }
 
-    public void setHealth(int health){this.health = health;}
-
-    public int getDamage(){return this.damage;}
-
-    public void setDamage(int damage){this.damage = damage;}
+    //Checking to see if survivor is dead
+    public boolean dead() {
+        return health <= 0;
+    }
 }
-
-

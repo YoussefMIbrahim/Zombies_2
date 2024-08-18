@@ -1,19 +1,16 @@
-public class Civilian extends Survivor{
+public class Civilian extends Survivor {
 
+    //Keeps track of Civilian instances
     private static int counter = 0;
+
+    //Unique ID
     private int id;
 
-    public Civilian(){
-
-        super(50,5);
+    //Getting Civilian ID
+    //Retruns ID
+    public Civilian() {
         this.id = ++counter;
 
     }
 
-    @Override
-    public int getId(){return this.id;}
-
-    @Override
-    public String toString(){return "Civilian";}
-    
 }

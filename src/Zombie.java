@@ -1,36 +1,30 @@
-public class Zombie {
-    
+//Id generation for zombies and health values
+public abstract class Zombie {
+  private int id;
+  private static int idCounter = 1;
+  private int health;
 
-    private int health;
-    private int damage;
-    private int id;
+  //Constructor to set heatlh of zombie
+  public Zombie(int health) {
+    this.id = idCounter++;
+    this.health = health;
+  }
 
-    public Zombie(int health, int damage){
-        this.health = health;
-        this.damage =damage;
+  //Zombie attack
+  public abstract int attack();
 
-    }
+  //Apply damage and subtract damage from health
+  public void hit(int damage) {
+    this.health -= damage;
+  }
 
-    public int attack(){
-        return this.damage;
-    }
+  //Checking to see if Zombie is dead
+  public boolean dead() {
+    return health <= 0;
+  }
 
-    public void hit(int damageTaken){
-        this.health -= damageTaken;
-    }
-
-    public boolean dead(){
-        return this.health <=0;
-
-    }
-
-    public int getId(){return this.id;}
-
-    public int getHealth(){return this.health;}
-
-    public void setHealth(int health){this.health = health;}
-
-    public int getDamage(){return this.damage;}
-
-    public void setDamage(int damage){this.damage = damage;}
+  //Getting zombie ID
+  public int getId() {
+    return id;
+  }
 }

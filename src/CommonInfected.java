@@ -1,18 +1,13 @@
 public class CommonInfected extends Zombie {
 
-    private static int counter = 0;
-    private int id;
-
-    public CommonInfected(){
-
-        super(30,5);
-
-        this.id = ++counter;
+    //Constructor starting at 30 health
+    public CommonInfected() {
+        super(30);
     }
 
+    //CommonInfected attack 10 damage
     @Override
-    public int getId(){return this.id;}
-
-    @Override
-    public String toString(){return "Common Infected";}
+    public int attack() {
+        return 10;
+    }
 }

@@ -1,17 +1,19 @@
 public class Soldier extends Survivor {
 
+    //Keeps track of soldier instances
     private static int counter = 0;
+
+    // Unique ID
     private int id;
 
-    public Soldier(){
-        super(100,10);
+    //Constructor
+    public Soldier() {
         this.id = ++counter;
     }
-    
-    @Override
-    public int getId(){return this.id;}
 
-    @Override
-    public String toString(){return "Soldier";}
-    
+    //Getting Soldier ID
+    //Retruns ID
+    public int getId() {
+        return id;
+    }
 }
